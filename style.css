@@ -1,0 +1,120 @@
+:root{
+  --azul:#008CFF;
+  --ciano:#00D9FF;
+  --navy:#061426;
+  --preto:#020810;
+  --branco:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  min-height:100vh;
+  display:flex;justify-content:center;align-items:flex-start;
+  font-family:'Segoe UI',Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--navy),var(--preto));
+  color:var(--branco);
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ---------- Fundo dinâmico ---------- */
+.bg-fx{position:fixed;inset:0;z-index:0;overflow:hidden;}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(70px);
+  opacity:.45;
+  mix-blend-mode:screen;
+  animation:float 16s ease-in-out infinite;
+}
+.b1{
+  width:420px;height:420px;top:-120px;left:-100px;
+  background:radial-gradient(circle,var(--azul),transparent 70%);
+  animation-duration:18s;
+}
+.b2{
+  width:360px;height:360px;bottom:-140px;right:-80px;
+  background:radial-gradient(circle,var(--ciano),transparent 70%);
+  animation-duration:22s;animation-delay:-4s;
+}
+.b3{
+  width:300px;height:300px;top:40%;left:60%;
+  background:radial-gradient(circle,var(--azul),transparent 70%);
+  animation-duration:20s;animation-delay:-9s;
+}
+@keyframes float{
+  0%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(30px,-40px) scale(1.1);}
+  66%{transform:translate(-25px,25px) scale(.95);}
+  100%{transform:translate(0,0) scale(1);}
+}
+.grid-overlay{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,217,255,.04) 1px,transparent 1px),
+                    linear-gradient(90deg,rgba(0,217,255,.04) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(circle at 50% 20%, black, transparent 70%);
+}
+
+/* ---------- Conteúdo ---------- */
+.page{position:relative;z-index:1;width:100%;max-width:420px;padding:48px 20px 40px;}
+
+.avatar{
+  width:92px;height:92px;border-radius:50%;margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--azul),var(--ciano));
+  box-shadow:0 0 0 3px rgba(0,217,255,.2),0 0 40px rgba(0,140,255,.45);
+  animation:pulse 3.5s ease-in-out infinite;
+}
+.avatar span{font-size:36px;font-weight:800;color:var(--preto);}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 0 3px rgba(0,217,255,.2),0 0 30px rgba(0,140,255,.35);}
+  50%{box-shadow:0 0 0 5px rgba(0,217,255,.3),0 0 55px rgba(0,140,255,.6);}
+}
+
+h1{text-align:center;font-size:23px;font-weight:800;letter-spacing:.3px;
+  opacity:0;animation:rise .6s ease forwards .1s;}
+.tagline{text-align:center;color:#8fb8d9;font-size:14px;margin-top:8px;line-height:1.55;
+  opacity:0;animation:rise .6s ease forwards .2s;}
+
+.links{margin-top:32px;display:flex;flex-direction:column;gap:14px;}
+
+.link{
+  display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:16px;
+  background:rgba(255,255,255,.045);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(0,217,255,.16);
+  color:var(--branco);text-decoration:none;
+  opacity:0;animation:rise .55s ease forwards;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.link:hover{
+  transform:translateY(-3px);
+  background:rgba(0,140,255,.14);
+  border-color:var(--ciano);
+  box-shadow:0 10px 30px rgba(0,140,255,.18);
+}
+.link .icon{
+  width:40px;height:40px;flex:0 0 auto;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,217,255,.12);
+}
+.link .icon svg{width:20px;height:20px;}
+.link .label{font-size:15px;font-weight:700;}
+.link .sub{display:block;font-size:12px;color:#8fb8d9;font-weight:400;margin-top:1px;}
+
+.links .link:nth-child(1){animation-delay:.28s;}
+.links .link:nth-child(2){animation-delay:.36s;}
+.links .link:nth-child(3){animation-delay:.44s;}
+.links .link:nth-child(4){animation-delay:.52s;}
+.links .link:nth-child(5){animation-delay:.6s;}
+
+@keyframes rise{
+  from{opacity:0;transform:translateY(14px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+footer{text-align:center;margin-top:36px;font-size:12px;color:#5c7d99;}
+
+@media (max-width:360px){
+  .blob{filter:blur(50px);}
+}
